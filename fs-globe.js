@@ -32,7 +32,7 @@
   const far = 10;
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.z = 2.5;
-  camera.position.y = 1.1;
+  camera.position.y = 1.2;
 
   const controls = new THREE.OrbitControls(camera, canvas);
   controls.enableDamping = true;
