@@ -66,7 +66,11 @@
   });
   const mesh = new THREE.Mesh(geometry, material);
   // mesh.rotation.y = -Math.PI / 2;
-  scene.add(mesh);
+  // create group and add mesh and add it to the scene
+  const group = new THREE.Group();
+  group.add(mesh);
+  scene.add(group);
+  // scene.add(mesh);
 
   material.map.needsUpdate = true;
 
@@ -326,7 +330,7 @@ function LoadSvg(url, scene) {
       group.scale.multiplyScalar(0.011);
       group.position.x = -9;
       group.rotation.x = Math.PI;
-      group.position.y = 10;
+      group.position.y = 5;
       group.position.z = -3;
 
       for (let i = 0; i < paths.length; i++) {
