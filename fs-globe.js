@@ -326,7 +326,7 @@ function LoadSvg(url, scene) {
       group.scale.multiplyScalar(0.011);
       group.position.x = -9;
       group.rotation.x = Math.PI;
-      group.position.y = 5;
+      group.position.y = 10;
       group.position.z = -3;
 
       for (let i = 0; i < paths.length; i++) {
