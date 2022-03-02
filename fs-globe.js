@@ -65,13 +65,8 @@
     side: THREE.DoubleSide,
   });
   const mesh = new THREE.Mesh(geometry, material);
-  // 
-  // create group and add mesh and add it to the scene
-  const group = new THREE.Group();
-  group.add(mesh);
-  group.rotation.y = -1;
-  scene.add(group);
-  // scene.add(mesh);
+  // mesh.rotation.y = -Math.PI / 2;
+  scene.add(mesh);
 
   material.map.needsUpdate = true;
 
