@@ -65,6 +65,7 @@
     side: THREE.DoubleSide,
   });
   const mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
   material.map.needsUpdate = true;
