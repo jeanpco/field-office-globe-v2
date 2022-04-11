@@ -56,7 +56,18 @@
   const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
 
   const loader = new THREE.TextureLoader();
-  const texture = loader.load(defaultValue.url, render);
+  const texture = loader.load(defaultValue.url, function () {
+    render();
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+  },
+  function (error) {
+    console.log('An error happened');
+  });
+
+
+
   texture.needsUpdate = true;
 
   const geometry = new THREE.SphereBufferGeometry(1, 64, 32);
