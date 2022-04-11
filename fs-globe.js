@@ -66,6 +66,10 @@
     console.log('An error happened');
   });
 
+  // check when texture has loaded
+  texture.onload = function () {
+    console.log('has loaded')
+  };
 
 
   texture.needsUpdate = true;
