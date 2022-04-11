@@ -376,6 +376,4 @@ function LoadSvg(url, scene) {
   );
 }
 
-(function () {
-  FsGlobe();
-})();
+window.FsGlobe = FsGlobe;
