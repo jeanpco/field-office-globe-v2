@@ -55,8 +55,19 @@ function FsGlobe() {
 
   const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
 
+  // Add a loading element to the HTML
+  <div id="loading">Loading...</div>
+
+  // Select the loading element and hide it initially
+  const loadingElement = document.querySelector('#loading');
+  loadingElement.style.display = 'none';
+
+  // Show the loading element before loading the texture
+  loadingElement.style.display = 'block';
+
   const loader = new THREE.TextureLoader();
   const texture = loader.load(defaultValue.url, function () {
+    loadingElement.style.display = 'none';
     render();
   },
   function (xhr) {
@@ -271,18 +282,6 @@ function FsGlobe() {
     }
   }
 
-  // USED TO PASS PAGE SCROLL AS PERCENTAGE
-  var getScrollPercent = function () {
-    var h = document.documentElement,
-      b = document.body,
-      st = 'scrollTop',
-      sh = 'scrollHeight';
-    return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-  };
-
-  // window.addEventListener("scroll", updateCamera);
-
-  // canvas.addEventListener("mousemove", onMousemove, false);
   controls.addEventListener('change', requestRenderIfNotRequested);
   window.addEventListener('resize', requestRenderIfNotRequested);
 }
@@ -307,18 +306,6 @@ function getInfoBox({ url, name, location = 'N/A', role = 'N/A' }) {
 
 function fetchDataFromCollection(collectionWrapper) {
   const collection = [].slice.call(document.querySelectorAll(collectionWrapper));
-
-  // const data = [].slice.call(collection.getElementsByTagName("embed"));
-
-  // return data.map((elem) => {
-  //   return {
-  //     name: elem.getAttribute("name"),
-  //     lat: elem.getAttribute("lat"),
-  //     lon: elem.getAttribute("lon"),
-  //     url: elem.getAttribute("url"),
-  //     hovertext: elem.getAttribute("hovertext"),
-  //   };
-  // });
 
   return collection.map((elem) => {
     return {
