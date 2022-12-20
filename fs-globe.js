@@ -66,6 +66,8 @@ function FsGlobe() {
 
   const loader = new THREE.TextureLoader();
 
+  let svgGroup = new THREE.Group();
+
   const texture = loader.load(
     defaultValue.url,
     function (data) {
@@ -75,8 +77,9 @@ function FsGlobe() {
         side: THREE.DoubleSide,
       });
       const mesh = new THREE.Mesh(geometry, material);
-      // mesh.rotation.y = -Math.PI / 2;
+
       scene.add(mesh);
+      scene.add(svgGroup);
     
       material.map.needsUpdate = true;
 
@@ -168,6 +171,7 @@ function FsGlobe() {
     }
     requestRenderIfNotRequested();
   }
+  
   loadCountryData();
 
   const tempV = new THREE.Vector3();
@@ -324,12 +328,12 @@ function LoadSvg(url, scene) {
     url,
     function (data) {
       let paths = data.paths;
-      let group = new THREE.Group();
-      group.scale.multiplyScalar(0.011);
-      group.position.x = -9;
-      group.rotation.x = Math.PI;
-      group.position.y = 5;
-      group.position.z = -3;
+      let svgGroup = new THREE.Group();
+      svgGroup.scale.multiplyScalar(0.011);
+      svgGroup.position.x = -9;
+      svgGroup.rotation.x = Math.PI;
+      svgGroup.position.y = 5;
+      svgGroup.position.z = -3;
 
       for (let i = 0; i < paths.length; i++) {
         let path = paths[i];
@@ -346,11 +350,9 @@ function LoadSvg(url, scene) {
           let shape = shapes[j];
           let geometry = new THREE.ShapeBufferGeometry(shape);
           let mesh = new THREE.Mesh(geometry, material);
-          group.add(mesh);
+          svgGroup.add(mesh);
         }
       }
-
-      scene.add(group);
     },
 
     function (xhr) {
