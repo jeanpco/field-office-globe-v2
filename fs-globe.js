@@ -328,7 +328,6 @@ function LoadSvg(url, scene) {
     url,
     function (data) {
       let paths = data.paths;
-      let svgGroup = new THREE.Group();
       svgGroup.scale.multiplyScalar(0.011);
       svgGroup.position.x = -9;
       svgGroup.rotation.x = Math.PI;
