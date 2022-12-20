@@ -62,7 +62,6 @@ function FsGlobe() {
   const team = fetchDataFromCollection(
     "[fs-3dglobe-element='list'] .w-dyn-item"
   );
-  const globeSection = document.querySelector('.parent-globe-section');
 
   const loader = new THREE.TextureLoader();
 
@@ -84,7 +83,6 @@ function FsGlobe() {
       material.map.needsUpdate = true;
 
       render();
-      globeSection.classList.add('loaded');
     },
     function (xhr) {
       console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
