@@ -55,9 +55,6 @@ function FsGlobe() {
 
   const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
 
-  // Add a loading element to the HTML
-  <div id="loading">Loading...</div>
-
   // Select the loading element and hide it initially
   const loadingElement = document.querySelector('#loading');
   loadingElement.style.display = 'none';
