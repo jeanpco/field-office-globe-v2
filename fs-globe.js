@@ -2,7 +2,7 @@
  *
  * @param {url} param
  */
- function FsGlobe() {
+function FsGlobe() {
   const mainContainer = document.querySelector("[fs-3dglobe-element='container']");
 
   const bgTexture = mainContainer.getAttribute('fs-3dglobe-img');
