@@ -54,10 +54,11 @@ function FsGlobe() {
   let animationFrame;
 
   const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
-  const globeSection = document.querySelector('[data-js="globe-section"]');
+  const globeSection = document.querySelector('.parent-globe-section');
 
   const loader = new THREE.TextureLoader();
   const texture = loader.load(defaultValue.url, function () {
+    console.log(globeSection)
     globeSection.classList.add('loaded');
     render();
   },
