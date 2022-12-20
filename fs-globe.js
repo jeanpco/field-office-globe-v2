@@ -68,7 +68,18 @@ function FsGlobe() {
 
   const texture = loader.load(
     defaultValue.url,
-    function () {
+    function (data) {
+      const geometry = new THREE.SphereBufferGeometry(1, 64, 32);
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      // mesh.rotation.y = -Math.PI / 2;
+      scene.add(mesh);
+    
+      material.map.needsUpdate = true;
+
       render();
       globeSection.classList.add('loaded');
     },
@@ -81,17 +92,6 @@ function FsGlobe() {
   );
 
   texture.needsUpdate = true;
-
-  const geometry = new THREE.SphereBufferGeometry(1, 64, 32);
-  const material = new THREE.MeshBasicMaterial({
-    map: texture,
-    side: THREE.DoubleSide,
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  // mesh.rotation.y = -Math.PI / 2;
-  scene.add(mesh);
-
-  material.map.needsUpdate = true;
 
   function loadCountryData() {
     const lonFudge = Math.PI * 1.5;
