@@ -55,16 +55,12 @@ function FsGlobe() {
 
   const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
 
-  // Select the loading element and hide it initially
-  const loadingElement = document.querySelector('#loading');
-  loadingElement.style.display = 'none';
-
-  // Show the loading element before loading the texture
-  loadingElement.style.display = 'block';
-
   const loader = new THREE.TextureLoader();
   const texture = loader.load(defaultValue.url, function () {
-    loadingElement.style.display = 'none';
+    const globeSection = document.querySelector('[data-js="globe-section"]');
+
+    globeSection.classList.add('loaded');
+
     render();
   },
   function (xhr) {
