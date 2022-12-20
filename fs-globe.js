@@ -3,6 +3,9 @@
  * @param {url} param
  */
 function FsGlobe() {
+
+  console.log('starting')
+
   const mainContainer = document.querySelector("[fs-3dglobe-element='container']");
 
   const bgTexture = mainContainer.getAttribute('fs-3dglobe-img');
@@ -57,6 +60,7 @@ function FsGlobe() {
   const globeSection = document.querySelector('.parent-globe-section');
 
   const loader = new THREE.TextureLoader();
+
   const texture = loader.load(defaultValue.url, function () {
     console.log(globeSection)
     globeSection.classList.add('loaded');
