@@ -3,10 +3,9 @@
  * @param {url} param
  */
 function FsGlobe() {
-
-  console.log('starting')
-
-  const mainContainer = document.querySelector("[fs-3dglobe-element='container']");
+  const mainContainer = document.querySelector(
+    "[fs-3dglobe-element='container']"
+  );
 
   const bgTexture = mainContainer.getAttribute('fs-3dglobe-img');
 
@@ -24,9 +23,13 @@ function FsGlobe() {
   canvas.className = 'canvas-3dglobe-container';
   globeContainer.appendChild(canvas);
 
-  const userInfo = [].slice.call(document.querySelectorAll("[fs-3dglobe-element='tooltip']"));
+  const userInfo = [].slice.call(
+    document.querySelectorAll("[fs-3dglobe-element='tooltip']")
+  );
 
-  const marker = [].slice.call(document.querySelectorAll("[fs-3dglobe-element='pin']"));
+  const marker = [].slice.call(
+    document.querySelectorAll("[fs-3dglobe-element='pin']")
+  );
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
   const fov = 60;
@@ -56,28 +59,30 @@ function FsGlobe() {
   let renderRequested = false;
   let animationFrame;
 
-  const team = fetchDataFromCollection("[fs-3dglobe-element='list'] .w-dyn-item");
+  const team = fetchDataFromCollection(
+    "[fs-3dglobe-element='list'] .w-dyn-item"
+  );
   const globeSection = document.querySelector('.parent-globe-section');
 
   const loader = new THREE.TextureLoader();
 
-  const texture = loader.load(defaultValue.url, function () {
-    console.log(globeSection)
-    globeSection.classList.add('loaded');
-    render();
-  },
-  function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-  },
-  function (error) {
-    console.log('An error happened');
-  });
+  const texture = loader.load(
+    defaultValue.url,
+    function () {
+      render(true);
+    },
+    function (xhr) {
+      console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+    },
+    function (error) {
+      console.log('An error happened');
+    }
+  );
 
   // check when texture has loaded
   texture.onload = function () {
-    console.log('has loaded')
+    console.log('has loaded');
   };
-
 
   texture.needsUpdate = true;
 
@@ -252,7 +257,7 @@ function FsGlobe() {
     return needResize;
   }
 
-  function render() {
+  function render(hasLoaded) {
     renderRequested = undefined;
 
     animationFrame = requestAnimationFrame(render);
@@ -267,7 +272,11 @@ function FsGlobe() {
     updateLabels();
 
     renderer.render(scene, camera);
+    if (hasLoaded) {
+      globeSection.classList.add('loaded');
+    }
   }
+
   render();
 
   function requestRenderIfNotRequested() {
@@ -301,11 +310,14 @@ function getInfoBox({ url, name, location = 'N/A', role = 'N/A' }) {
 }
 
 function fetchDataFromCollection(collectionWrapper) {
-  const collection = [].slice.call(document.querySelectorAll(collectionWrapper));
+  const collection = [].slice.call(
+    document.querySelectorAll(collectionWrapper)
+  );
 
   return collection.map((elem) => {
     return {
-      name: (elem.querySelector("[fs-3dglobe-element='name'") || {}).textContent,
+      name: (elem.querySelector("[fs-3dglobe-element='name'") || {})
+        .textContent,
       lat: (elem.querySelector("[fs-3dglobe-element='lat'") || {}).textContent,
       lon: (elem.querySelector("[fs-3dglobe-element='lon'") || {}).textContent,
       url: (elem.querySelector("[fs-3dglobe-element='url'") || {}).textContent,
