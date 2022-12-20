@@ -69,7 +69,8 @@ function FsGlobe() {
   const texture = loader.load(
     defaultValue.url,
     function () {
-      render(true);
+      render();
+      globeSection.classList.add('loaded');
     },
     function (xhr) {
       console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
@@ -78,11 +79,6 @@ function FsGlobe() {
       console.log('An error happened');
     }
   );
-
-  // check when texture has loaded
-  texture.onload = function () {
-    console.log('has loaded');
-  };
 
   texture.needsUpdate = true;
 
@@ -257,7 +253,7 @@ function FsGlobe() {
     return needResize;
   }
 
-  function render(hasLoaded) {
+  function render() {
     renderRequested = undefined;
 
     animationFrame = requestAnimationFrame(render);
@@ -272,11 +268,7 @@ function FsGlobe() {
     updateLabels();
 
     renderer.render(scene, camera);
-    if (hasLoaded) {
-      globeSection.classList.add('loaded');
-    }
   }
-
   render();
 
   function requestRenderIfNotRequested() {
